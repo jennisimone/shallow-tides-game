@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://dckrnkxg2bhk"]
+
+[ext_resource type="Script" uid="uid://bbb61ng30opub" path="res://assets/ui/balloon.gd" id="1_36de5"]
+[ext_resource type="Resource" uid="uid://7adl8ux2prdd" path="res://assets/dialogue/test.dialogue" id="2_0gjej"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/nodes/dialogue_label/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="Texture2D" uid="uid://cfqhdd4dnpjgh" path="res://assets/background_images/beach.png" id="3_4n80o"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/nodes/responses_menu/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="Theme" uid="uid://t0d0pmo5wiob" path="res://assets/themes/main_theme.tres" id="3_c1eld"]
+[ext_resource type="Texture2D" uid="uid://cacb5v115trv3" path="res://assets/character_art/character.png" id="4_4n80o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkryd"]
+atlas = ExtResource("4_4n80o")
+region = Rect2(824, 200, 696, 1240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4n80o"]
+atlas = ExtResource("4_4n80o")
+region = Rect2(120, 224, 696, 1240)
+
+[sub_resource type="Animation" id="Animation_nlsx6"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Progress:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_qkmqt"]
+resource_name = "progress"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Progress:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.2, -0.0157438, -4, -0.2, 0.0112069, 0.25, 0, -4, -0.25, 0, 0.25, 0, 0, -0.2, 0.00299701, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1337t"]
+_data = {
+&"RESET": SubResource("Animation_nlsx6"),
+&"progress": SubResource("Animation_qkmqt")
+}
+
+[node name="DialogueBox" type="CanvasLayer" unique_id=38036521]
+layer = 100
+script = ExtResource("1_36de5")
+dialogue_resource = ExtResource("2_0gjej")
+
+[node name="Background" type="PanelContainer" parent="." unique_id=968944140]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Background" unique_id=478010839]
+layout_mode = 2
+size_flags_horizontal = 19
+size_flags_vertical = 19
+texture = ExtResource("3_4n80o")
+expand_mode = 3
+
+[node name="Character" type="Control" parent="." unique_id=451536642]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -371.01062
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PlayerPortrait" type="TextureRect" parent="Character" unique_id=1318087297]
+layout_mode = 0
+offset_left = -31.0
+offset_top = -160.98938
+offset_right = 194.0
+offset_bottom = 210.02124
+texture = SubResource("AtlasTexture_xkryd")
+expand_mode = 5
+
+[node name="NpcPortrait" type="TextureRect" parent="Character" unique_id=142493281]
+layout_mode = 0
+offset_left = -896.0
+offset_top = -159.98938
+offset_right = -671.0
+offset_bottom = 240.87268
+texture = SubResource("AtlasTexture_4n80o")
+expand_mode = 5
+flip_h = true
+
+[node name="Balloon" type="Control" parent="." unique_id=154399927]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_c1eld")
+
+[node name="MarginContainer" type="MarginContainer" parent="Balloon" unique_id=1302081376]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -233.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer" unique_id=2145270309]
+clip_children = 2
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer" unique_id=903640783]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer" unique_id=1529142017]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1685890612]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1890134056]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1567782692]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 2
+mouse_filter = 1
+bbcode_enabled = true
+text = "Character"
+fit_content = true
+scroll_active = false
+
+[node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1301798052 instance=ExtResource("2_a8ve6")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Dialogue..."
+
+[node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=418507161]
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Progress" type="Polygon2D" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Control" unique_id=2091292889]
+unique_name_in_owner = true
+position = Vector2(26, 0)
+polygon = PackedVector2Array(0, 0, 10, 10, 20, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Control" unique_id=1602634471]
+libraries/ = SubResource("AnimationLibrary_1337t")
+autoplay = &"progress"
+
+[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1801308483 node_paths=PackedStringArray("response_template")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+script = ExtResource("3_72ixx")
+response_template = NodePath("ResponseExample")
+
+[node name="ResponseExample" type="Button" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ResponsesMenu" unique_id=1446810977]
+layout_mode = 2
+text = "Response example"
+alignment = 0
+
+[node name="ResponseExample2" type="Button" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ResponsesMenu" unique_id=547810686]
+layout_mode = 2
+text = "Response example"
+alignment = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1162558754]
+unique_name_in_owner = true
+
+[connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="response_selected" from="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

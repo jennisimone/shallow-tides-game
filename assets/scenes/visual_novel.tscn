@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c0pwbndkno6t1"]
+
+[ext_resource type="Script" uid="uid://d3di1esmywtj3" path="res://assets/scenes/visual_novel.gd" id="1_phrdp"]
+
+[node name="VisualNovel" type="Node" unique_id=975848483]
+script = ExtResource("1_phrdp")
